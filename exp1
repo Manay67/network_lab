@@ -1,31 +1,70 @@
 #include<stdio.h>
-void main(){
-    int m_size, p_size, n_frames, n_process, n_page[100], page_table[100][100];
-    printf("Enter memory size: ");
-    scanf("%d", &m_size);
-    printf("Enter the page size: ");
-    scanf("%d", &p_size);
-    printf("Enter the number of frames avaliable: ");
-    scanf("%d", &n_frames);
-    printf("Enter the number of processes to be loaded: ");
-    scanf("%d", &n_process);
-    printf("Enter the process details:\n");
-    for(int i = 0; i < n_process; i++){
-        printf("\nProcess %d: ");
-        printf("\n\tNo of pages: ");
-        scanf("%d", &n_page[i]);
-        printf("\n\tEnter the page table: \n\t\t");
-        for(int j= 0; j<n_page[i]; j++)
-            scanf("%d", &page_table[i][j]);
-    }
+#include<conio.h>
+#include<ctype.h>
+#include<string.h>
 
-    int choice=0;
-    do {
-        printf("\t\tMENU\n\n");
-        printf("\n1. Convert logical address to physical address: ");
-        printf("\n2. Exit");
-        printf("\n\nEnter your choice: ");
-        scanf("%d", &choice);
-        
-    } while(choice!=2);
+void main(){
+
+int i,ic=0,m,cc=0,oc=0,j;
+char b[30],operators[30],identifiers[30],constants[30];
+
+printf("enter the string : ");
+scanf("%[^\n]s",&b);
+for(i=0;i<strlen(b);i++){
+
+    if(isspace(b[i])){
+        continue;
+    }
+    else if(isalpha(b[i])){
+        identifiers[ic] =b[i];
+         ic++;
+    }
+    else if(isdigit(b[i])){
+        m=(b[i]-'0');
+        i=i+1;
+        while(isdigit(b[i])){
+            m=m*10 + (b[i]-'0');
+            i++;
+        }
+        i=i-1;
+        constants[cc]=m;
+        cc++;
+    }
+     else{
+        if(b[i]=='*'){
+            operators[oc]='*';
+            oc++;
+        }
+        else if(b[i]=='-'){
+            operators[oc]='-';
+            oc++;
+        }
+        else if(b[i]=='+'){
+            operators[oc]='+';
+            oc++;
+        }
+         else if(b[i]=='='){
+            operators[oc]='=';
+            oc++;
+        }
+
+  }
+
+}
+// printing
+
+    printf(" identifiers : ");
+     for(j=0;j<ic;j++){
+        printf("%c ",identifiers[j]);
+     }
+    printf("\n constants : ");
+     for(j=0;j<cc;j++){
+        printf("%d ",constants[j]);
+     }
+    printf("\n operators : ");
+      for(j=0;j<oc;j++){
+        printf("%c ",operators[j]);
+      }
+
+
 }
